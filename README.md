@@ -1,0 +1,1 @@
+This repo demonstrates my progress in learning OpenGL using Python.
