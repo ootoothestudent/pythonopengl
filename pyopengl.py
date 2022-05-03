@@ -10,6 +10,7 @@ WIDTH, HEIGHT = 1280, 720
 last_x, last_y = WIDTH / 2, HEIGHT / 2
 first_mouse = True
 
+# Mouse Look Callback Function...
 def mouse_look_clb(window, x, y):
     global last_x, last_y
 
@@ -17,6 +18,7 @@ def mouse_look_clb(window, x, y):
         last_x = x
         last_y = y
 
+    # Invert axes (OpenGL inverts axes)...
     x_offset = x - last_x
     y_offset = last_y - y
 
@@ -25,6 +27,7 @@ def mouse_look_clb(window, x, y):
 
     view_cam.process_mouse_movement(x_offset, y_offset)
 
+# Mouse Enter Callback Function...
 def mouse_enter_clb(window, entered):
     global first_mouse
 
@@ -54,6 +57,7 @@ def Cube():
     glEnd()
 
 def main():
+    # Initialize Display
     pg.init()
     display = (WIDTH, HEIGHT)
     pg.display.set_mode(display, DOUBLEBUF | OPENGL)
@@ -100,4 +104,4 @@ def main():
         pg.display.flip()
         pg.time.wait(10)
 
-main()
+main() # Call main Function
