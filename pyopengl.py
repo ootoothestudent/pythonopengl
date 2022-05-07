@@ -1,3 +1,11 @@
+# This program allows a user to rotate a wireframe mesh with a mouse
+# using OpenGL and PyGame.
+#
+# Version 1.0 - 08.05.22
+# 
+# Resource 1: https://www.youtube.com/watch?v=R4n4NyDG2hI&t=632s
+# Resource 2: https://stackoverflow.com/questions/59823131/how-to-rotate-a-cube-using-mouse-in-pyopengl
+
 import pygame as pg
 from pygame.locals import *
 
@@ -11,7 +19,7 @@ last_x, last_y = WIDTH / 2, HEIGHT / 2
 first_mouse = True
 
 # Mouse Look Callback Function...
-def mouse_look_clb(window, x, y):
+def mouse_look(window, x, y):
     global last_x, last_y
 
     if first_mouse:
@@ -28,7 +36,7 @@ def mouse_look_clb(window, x, y):
     view_cam.process_mouse_movement(x_offset, y_offset)
 
 # Mouse Enter Callback Function...
-def mouse_enter_clb(window, entered):
+def mouse_enter(window, entered):
     global first_mouse
 
     if entered:
@@ -78,10 +86,12 @@ def main():
                 pg.quit()
                 quit()
             if event.type == pg.MOUSEMOTION:
+                # Rotate 3D mesh with mouse
                 if button_down == True:
                     glRotatef(event.rel[1], 1, 0, 0)
                     glRotatef(event.rel[0], 0, 1, 0)
             
+            # Set the mouse down to true if it has been pressed
             for event in pg.mouse.get_pressed():
                 if pg.mouse.get_pressed()[0] == 1:
                     button_down = True
@@ -97,7 +107,7 @@ def main():
         glTranslate(0, 0, -5)
         glMultMatrixf(modelMatrix)
 
-        Cube()
+        Cube() # Render cube
 
         glPopMatrix()
 
