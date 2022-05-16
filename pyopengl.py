@@ -12,6 +12,8 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
+import pygame_gui
+
 from camera import Camera
 view_cam = Camera()
 WIDTH, HEIGHT = 1280, 720
@@ -59,9 +61,17 @@ edges = (
 def Cube():
     # Draw Cube
     glBegin(GL_LINES)
+    glColor3f(1.0, 0.5, 1.0)
     for edge in edges:
         for vertex in edge:
             glVertex3fv(vertices[vertex])
+    glEnd()
+
+def Line():
+    glBegin(GL_LINES)
+    glColor3f(1.0, 1.0, 1.0)
+    glVertex2f(-0.5, -0.5)
+    glVertex2f(0.5, 0.5)
     glEnd()
 
 def main():
@@ -104,10 +114,11 @@ def main():
         modelMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
 
         glLoadIdentity()
-        glTranslate(0, 0, -5)
+        glTranslate(0, 0, -8)
         glMultMatrixf(modelMatrix)
 
-        Cube() # Render cube
+        Line() # Render cube
+        Cube()
 
         glPopMatrix()
 
