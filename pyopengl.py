@@ -12,7 +12,7 @@ from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-import pygame_gui
+
 
 from camera import Camera
 view_cam = Camera()
@@ -91,7 +91,7 @@ def Cube():
     
     
     # Draw Cube
-    glBegin(GL_LINES)
+    glBegin(GL_POLYGON)
     glColor3f(1.0, 0.5, 1.0)
     for edge in edges:
         for vertex in edge:
@@ -101,7 +101,13 @@ def Cube():
 def Line():
     glBegin(GL_LINES)
     glColor3f(1.0, 1.0, 1.0)
-    glVertex2f(-0.5, -0.5)
+    glVertex2f(-0.3, -0.5)
+    glVertex2f(0.5, 0.5)
+    glEnd()
+def Line2():
+    glBegin(GL_LINES)
+    glColor3f(1.0, 0.9, 1.0)
+    glVertex2f(0.5, 0.5)
     glVertex2f(0.5, 0.5)
     glEnd()
 
@@ -132,6 +138,7 @@ def main():
                     glRotatef(event.rel[1], 1, 0, 0)
                     glRotatef(event.rel[0], 0, 1, 0)
             
+                    
             # Set the mouse down to true if it has been pressed
             for event in pg.mouse.get_pressed():
                 if pg.mouse.get_pressed()[0] == 1:
@@ -147,9 +154,10 @@ def main():
         glLoadIdentity()
         glTranslate(0, 0, -8)
         glMultMatrixf(modelMatrix)
-
-        Line() # Render cube
-        Cube()
+        # Line2()
+        # Line() # Render line 
+        Cube() #render cube 
+        
 
         glPopMatrix()
 
